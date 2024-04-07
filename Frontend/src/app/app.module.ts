@@ -8,6 +8,7 @@ import { ApiService, PersonService } from './core/services';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ToolbarModule } from 'primeng/toolbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
   providers: [
     HttpClient,
     ApiService,
-    PersonService
+    PersonService,
+    ConfirmationService,
+    MessageService
   ],
   bootstrap: [AppComponent]
 })

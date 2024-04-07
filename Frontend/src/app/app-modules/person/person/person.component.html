@@ -1,45 +1,65 @@
-<div class="person-container">
-    <div>
+<form [formGroup]="personForm" (ngSubmit)="save()" novalidate>
+    <div class="person-container">
+        <div>
+            <div>
+                <span class="p-float-label width-100">
+                    <input type="text" pInputText id="firstName" class="width-100"
+                    formControlName="firstName" />
+                    <label for="firstName">First Name</label>
+                    <small class="p-error block"
+                        *ngIf="personForm.get('firstName')?.invalid && personForm.get('firstName')?.dirty">
+                        First name is required</small>
+                </span>
+            </div>
+            <div>
+                <span class="p-float-label width-100">
+                    <input type="text" pInputText id="lastName" formControlName="lastName" class="width-100" />
+                    <label for="lastName">Last Name</label>
+                    <small class="p-error block"
+                        *ngIf="personForm.get('lastName')?.invalid && personForm.get('lastName')?.dirty">
+                        Last name is required</small>
+                </span>
+            </div>
+        </div>
+
         <div>
             <span class="p-float-label width-100">
-                <input type="text" pInputText id="firstName" [(ngModel)]="entity.firstName" class="width-100" />
-                <label for="firstName">First Name</label>
+                <input type="text" pInputText id="address" formControlName="address" class=" width-100" />
+                <label for="address">Address</label>
+                <small class="p-error block"
+                        *ngIf="personForm.get('address')?.invalid && personForm.get('address')?.dirty">
+                        Address is required</small>
             </span>
         </div>
+
         <div>
-            <span class="p-float-label width-100">
-                <input type="text" pInputText id="lastName" [(ngModel)]="entity.lastName" class="width-100" />
-                <label for="lastName">Last Name</label>
+            <span class="p-float-label">
+                <p-calendar inputId="birth_date" formControlName="dateOfBirth"></p-calendar>
+                <label for="birth_date">Birth Date</label>
+                <small class="p-error block"
+                *ngIf="personForm.get('dateOfBirth')?.invalid && personForm.get('dateOfBirth')?.dirty">
+                Birth Date is required</small>
+            </span>
+
+            <span class="p-float-label">
+                <input type="text" pInputText id="iban" formControlName="iban" />
+                <label for="iban">IBAN</label>
+                <small class="p-error block"
+                *ngIf="personForm.get('iban')?.invalid && personForm.get('iban')?.dirty">
+                IBAN is required</small>
+            </span>
+
+            <span class="p-float-label">
+                <input type="text" pInputText id="phoneNumber" formControlName="phoneNumber" />
+                <label for="phoneNumber">Phone Number</label>
+                <small class="p-error block"
+                *ngIf="personForm.get('phoneNumber')?.invalid && personForm.get('phoneNumber')?.dirty">
+                Phone Number is required</small>
             </span>
         </div>
-    </div>
-    
-    <div>
-        <span class="p-float-label width-100">
-            <input type="text" pInputText id="address" [(ngModel)]="entity.address" class=" width-100" />
-            <label for="address">Address</label>
-        </span>
-    </div>
-    
-    <div>
-        <span class="p-float-label">
-            <p-calendar [(ngModel)]="entity.dateOfBirth" inputId="birth_date"></p-calendar>
-            <label for="birth_date">Birth Date</label>
-        </span>
 
-        <span class="p-float-label">
-            <input type="text" pInputText id="iban" [(ngModel)]="entity.iban" />
-            <label for="iban">IBAN</label>
-        </span>
-
-        <span class="p-float-label">
-            <input type="text" pInputText id="phoneNumber" [(ngModel)]="entity.phoneNumber" /> 
-            <label for="phoneNumber">Phone Number</label>
-        </span>
+        <div class="btn-container">
+            <button pButton type="submit" label="Save" [disabled]="personForm.invalid"></button>
+        </div>
     </div>
-
-    <div class="btn-container">
-        <p-button label="Save" (onClick)="save()"></p-button>
-    </div>
-
-</div>
+</form>

@@ -3,6 +3,7 @@ import { Person } from '../../../core/models';
 import { PersonService } from '../../../core/services';
 import { Router } from '@angular/router';
 import { first } from 'rxjs';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-person',
@@ -10,22 +11,22 @@ import { first } from 'rxjs';
   styleUrls: ['./person.component.scss']
 })
 export class PersonComponent {
-  entity: Person = {
-    id: '',
-    firstName: '',
-    lastName: '',
-    dateOfBirth: new Date(),
-    address: '',
-    iban: '',
-    phoneNumber: ''
-  }
+  personForm = this.fb.group({
+    firstName: ['', Validators.required], 
+    lastName: ['', Validators.required],
+    address:  ['', Validators.required],
+    dateOfBirth: ['', Validators.required],
+    iban:  ['', Validators.required],
+    phoneNumber: ['', Validators.required],
+  });
  
   constructor(private personService: PersonService,
-    private router: Router) {    
+    private router: Router,
+    private fb: FormBuilder) {    
   }
 
   save() {   
-    this.personService.create(this.entity)
+    this.personService.create(this.personForm.value)
       .pipe(first())
       .subscribe(data => this.router.navigate([`/person-mgmt`]))
   }

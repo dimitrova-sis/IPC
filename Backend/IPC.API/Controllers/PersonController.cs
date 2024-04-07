@@ -34,7 +34,7 @@ namespace IPC.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreatePersonAsync([FromBody] PersonCreateInputModel model, CancellationToken cancellationToken)
+        public async Task<IActionResult> CreateAsync([FromBody] PersonCreateInputModel model, CancellationToken cancellationToken)
         {
             var command = new CreatePerson()
             {
@@ -46,6 +46,16 @@ namespace IPC.Web.Controllers
                 PhoneNumber = model.PhoneNumber,
             };
 
+            var result = await _mediator.Send(command, cancellationToken);
+
+            return Ok(result);
+        }
+
+        [HttpDelete]
+        [Route("{id}")]       
+        public async Task<IActionResult> DeleteAsync(string id, CancellationToken cancellationToken)
+        {   
+            var command = new DeletePerson() { PersonId = Guid.Parse(id) };
             var result = await _mediator.Send(command, cancellationToken);
 
             return Ok(result);

@@ -9,8 +9,11 @@ import { InputTextModule } from 'primeng/inputtext';
 import { CalendarModule } from 'primeng/calendar';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { AnimateModule } from 'primeng/animate';
+import { RippleModule } from 'primeng/ripple';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToastModule } from 'primeng/toast';
 import { PersonComponent } from './person/person.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -21,13 +24,17 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     PersonRoutingModule,
+    ReactiveFormsModule,
     FormsModule,
     TableModule,
     ButtonModule,
+    RippleModule,
     InputTextModule,
     CalendarModule,
     AnimateModule,
-    InputNumberModule
+    InputNumberModule,
+    ConfirmDialogModule,
+    ToastModule
   ]
 })
 export class PersonModule { }

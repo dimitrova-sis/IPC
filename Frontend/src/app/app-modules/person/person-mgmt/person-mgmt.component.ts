@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { PersonService } from '../../../core/services';
-import { first } from 'rxjs/operators';
+import { catchError, first } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { Person } from '../../../core/models';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-person-mgmt',
@@ -12,6 +14,8 @@ export class PersonMgmtComponent implements OnInit {
   people: any[] = []
 
   constructor(private personService: PersonService,
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService,
     private router: Router) {
 
   }
@@ -23,17 +27,33 @@ export class PersonMgmtComponent implements OnInit {
 
   new() {
     this.router.navigate([`/person`])
-    // var person = {
-    //   "firstName": "First",
-    //   "lastName": "Test",
-    //   "dateOfBirth": "1995-04-06",
-    //   "address": "my address",
-    //   "phoneNumber": "11225355",
-    //   "iban": "BG2323"
-    // }
+  }
 
-    // this.personService.create(person)
-    //   .pipe(first())
-    //   .subscribe(data => console.log(data))
+  delete(person: Person) {
+    this.confirmationService.confirm({
+      message: 'Are you sure that you want to proceed?',
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => this.acceptDelete(person),
+      reject: () => this.rejectDelete()
+    });
+  }
+
+  acceptDelete(person: Person) {
+    this.personService.delete(person.id)
+      .pipe(first())
+      .subscribe(data => {
+        var msg = `Person ${person.firstName} ${person.lastName} was successfully deleted!`
+        this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: msg, life: 3000 });
+
+        const index = this.people.findIndex(p => p.id === person.id)
+        if (index > -1) {
+          this.people.splice(index, 1);
+        }
+      })
+  }
+
+  rejectDelete() {
+    console.log("reject deletion")
   }
 }
