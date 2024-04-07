@@ -1,0 +1,45 @@
+<div class="person-container">
+    <div>
+        <div>
+            <span class="p-float-label width-100">
+                <input type="text" pInputText id="firstName" [(ngModel)]="entity.firstName" class="width-100" />
+                <label for="firstName">First Name</label>
+            </span>
+        </div>
+        <div>
+            <span class="p-float-label width-100">
+                <input type="text" pInputText id="lastName" [(ngModel)]="entity.lastName" class="width-100" />
+                <label for="lastName">Last Name</label>
+            </span>
+        </div>
+    </div>
+    
+    <div>
+        <span class="p-float-label width-100">
+            <input type="text" pInputText id="address" [(ngModel)]="entity.address" class=" width-100" />
+            <label for="address">Address</label>
+        </span>
+    </div>
+    
+    <div>
+        <span class="p-float-label">
+            <p-calendar [(ngModel)]="entity.dateOfBirth" inputId="birth_date"></p-calendar>
+            <label for="birth_date">Birth Date</label>
+        </span>
+
+        <span class="p-float-label">
+            <input type="text" pInputText id="iban" [(ngModel)]="entity.iban" />
+            <label for="iban">IBAN</label>
+        </span>
+
+        <span class="p-float-label">
+            <input type="text" pInputText id="phoneNumber" [(ngModel)]="entity.phoneNumber" /> 
+            <label for="phoneNumber">Phone Number</label>
+        </span>
+    </div>
+
+    <div class="btn-container">
+        <p-button label="Save" (onClick)="save()"></p-button>
+    </div>
+
+</div>

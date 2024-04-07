@@ -1,0 +1,23 @@
+.person-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    div {
+        padding-top: 1rem;
+        display: flex;
+        flex-grow: 1;
+        gap: 1rem;
+    }
+}
+
+:host ::ng-deep {
+    .width-100 {
+        width: 100%;
+    }
+
+    .width-50 {
+        width: 50%;
+    }
+}
