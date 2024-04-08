@@ -51,5 +51,17 @@ namespace IPC.Domain.Aggregates
             return person;
         }
 
+        public void UpdatePerson(string firstName, string lastName, DateTime dateOfBirth, string address,
+            string iban, string phoneNumber)
+        { 
+            FirstName = firstName;
+            LastName = lastName;
+            DateOfBirth = dateOfBirth;
+            Address = address;
+            IBAN = iban;
+            PhoneNumber = phoneNumber;
+
+            LastModified = DateTime.UtcNow;
+        }
     }
 }

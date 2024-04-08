@@ -8,16 +8,14 @@ export class PersonService {
 
     constructor(private httpService: ApiService) { }
 
-    create(model: any) {
-        const resourceURL = `${this.object}`
-
-        return this.httpService.post(resourceURL, model)
-    }
-
-    update(model: any) {
-        const resourceURL = `${this.object}/update`
-
-        return this.httpService.post(resourceURL, model)
+    save(model: any, id: string | null = null) {
+        if (id) {
+            const resourceURL = `${this.object}/${id}`
+            return this.httpService.patch(resourceURL, model)
+        } else {
+            const resourceURL = `${this.object}`
+            return this.httpService.post(resourceURL, model)
+        }
     }
 
     delete(id: string) {

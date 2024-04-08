@@ -4,6 +4,7 @@ import { catchError, first } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Person } from '../../../core/models';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { PersonStoreService } from '../../../core/services/store/person-store.service';
 
 @Component({
   selector: 'app-person-mgmt',
@@ -16,6 +17,7 @@ export class PersonMgmtComponent implements OnInit {
   constructor(private personService: PersonService,
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
+    private personStoreService: PersonStoreService,
     private router: Router) {
 
   }
@@ -26,6 +28,7 @@ export class PersonMgmtComponent implements OnInit {
   }
 
   new() {
+    this.personStoreService.personEdit = null
     this.router.navigate([`/person`])
   }
 
@@ -55,5 +58,10 @@ export class PersonMgmtComponent implements OnInit {
 
   rejectDelete() {
     console.log("reject deletion")
+  }
+
+  edit(person: Person) {
+    this.personStoreService.personEdit = person
+    this.router.navigate([`/person`])
   }
 }

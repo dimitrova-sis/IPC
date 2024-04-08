@@ -5,7 +5,6 @@ namespace IPC.Web.Controllers
     using IPC.UseCases.PersonUseCases.Commands;
     using MediatR;
     using Microsoft.AspNetCore.Mvc;
-    using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
     using System.Threading;
     using IPC.UseCases.PersonUseCases.Queries;
 
@@ -34,10 +33,30 @@ namespace IPC.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateAsync([FromBody] PersonCreateInputModel model, CancellationToken cancellationToken)
+        public async Task<IActionResult> CreateAsync([FromBody] PersonInputModel model, CancellationToken cancellationToken)
         {
             var command = new CreatePerson()
             {
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                DateOfBirth = model.DateOfBirth,
+                IBAN = model.IBAN,
+                Address = model.Address,
+                PhoneNumber = model.PhoneNumber,
+            };
+
+            var result = await _mediator.Send(command, cancellationToken);
+
+            return Ok(result);
+        }
+
+        [HttpPatch]
+        [Route("{id}")]
+        public async Task<IActionResult> UpdateAsync(string id, [FromBody] PersonInputModel model, CancellationToken cancellationToken)
+        {
+            var command = new UpdatePerson()
+            {
+                Id = Guid.Parse(id),
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 DateOfBirth = model.DateOfBirth,

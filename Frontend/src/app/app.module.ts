@@ -9,10 +9,15 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ToolbarModule } from 'primeng/toolbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { StoreModule } from '@ngrx/store';
+import { PersonReducer } from './core/store/reducers/person.reducers';
+import { BaseComponent } from './components/base/base.component';
+import { PersonStoreService } from './core/services/store/person-store.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    BaseComponent
   ],
   imports: [
     BrowserModule,
@@ -20,14 +25,16 @@ import { ConfirmationService, MessageService } from 'primeng/api';
     AppRoutingModule,
     PersonModule,
     HttpClientModule,
-    ToolbarModule
+    ToolbarModule,
+    StoreModule.forRoot({person:PersonReducer }),
   ],
   providers: [
     HttpClient,
     ApiService,
     PersonService,
     ConfirmationService,
-    MessageService
+    MessageService,
+    PersonStoreService 
   ],
   bootstrap: [AppComponent]
 })

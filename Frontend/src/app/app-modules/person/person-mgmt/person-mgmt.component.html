@@ -17,7 +17,7 @@
             <td>{{ person.phoneNumber }}</td>
             <td>{{ person.iban }}</td>
             <td>
-                <button pButton pRipple type="button" icon="pi pi-user-edit"
+                <button pButton pRipple type="button" icon="pi pi-user-edit" (click)="edit(person)"
                     class="p-button-rounded p-button-text"></button>
                 <button pButton pRipple type="button" icon="pi pi-trash" (click)="delete(person)"
                     class="p-button-rounded p-button-danger p-button-text"></button>

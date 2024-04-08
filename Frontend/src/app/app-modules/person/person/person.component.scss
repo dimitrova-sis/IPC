@@ -10,6 +10,11 @@
         flex-grow: 1;
         gap: 1rem;
     }
+
+    .btn-container {
+        padding-top: 2rem;
+        float: right;
+    }
 }
 
 :host ::ng-deep {

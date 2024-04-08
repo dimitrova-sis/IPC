@@ -1,20 +1,22 @@
-﻿namespace IPC.DTOs.InputModels
+﻿namespace IPC.UseCases.PersonUseCases.Commands
 {
-    using System.ComponentModel.DataAnnotations;
+    using IPC.Domain.Aggregates;
+    using MediatR;
 
-    public class PersonCreateInputModel
+    public class UpdatePerson : IRequest<Person>
     {
-        [Required]
+        public Guid Id { get; set; }
+
         public string FirstName { get; set; }
-        [Required]
+
         public string LastName { get; set; }
-        [Required]
+
         public DateTime DateOfBirth { get; set; }
-        [Required]
+
         public string Address { get; set; }
-        [Required]
+
         public string PhoneNumber { get; set; }
-        [Required]
+
         public string IBAN { get; set; }
     }
 }
