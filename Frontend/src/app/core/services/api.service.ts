@@ -1,7 +1,8 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { defer, EMPTY, Observable, of } from 'rxjs'
+import { EMPTY, Observable } from 'rxjs'
 import { catchError, map } from 'rxjs/operators'
+import { environment } from '../../../enviroments/environment'
 
 @Injectable()
 export class ApiService {
@@ -11,7 +12,7 @@ export class ApiService {
         Accept: 'application/json'
     })
 
-    api_url: string = 'https://localhost:44378/'
+    api_url: string = environment.apiBaseUrl
 
     constructor(
         private http: HttpClient,
