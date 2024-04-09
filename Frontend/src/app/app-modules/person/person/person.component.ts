@@ -19,7 +19,7 @@ export class PersonComponent extends BaseComponent implements OnInit {
     dateOfBirth: [new FormControl<Date | null>(null), Validators.required],
     iban: ['', [Validators.required, Validators.maxLength(34),
     Validators.pattern('^[A-Z]{2}(?:[ ]?[0-9]){18,20}$')]],
-    phoneNumber: ['', [Validators.required, Validators.maxLength(13),
+    phoneNumber: ['', [Validators.required, Validators.maxLength(13), Validators.minLength(3),
     Validators.pattern('^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$')]],
   });
 

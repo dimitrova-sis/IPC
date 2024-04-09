@@ -1,11 +1,11 @@
-﻿namespace IPC.Domain.Validators
+﻿namespace IPC.DTOs.Validators
 {
     using FluentValidation;
-    using IPC.Domain.Aggregates;
+    using IPC.DTOs.InputModels;
 
-    internal class PersonValidator : AbstractValidator<Person>
+    public class PersonInputValidator : AbstractValidator<PersonInputModel>
     {
-        public PersonValidator()
+        public PersonInputValidator()
         {
             RuleFor(person => person.FirstName)
                 .NotNull()

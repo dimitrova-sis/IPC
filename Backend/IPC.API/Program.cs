@@ -1,9 +1,12 @@
+using FluentValidation;
 using IPC.DataLayer;
 using IPC.DataLayer.Contracts;
 using IPC.DataLayer.Implementations;
+using IPC.DTOs.Validators;
 using IPC.UseCases.PersonUseCases.Commands;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +32,9 @@ var readConnectionString = builder.Configuration.GetConnectionString("IPCReadCon
 builder.Services.AddDbContext<IPCReadContext>(options => options.UseSqlServer(readConnectionString));
 
 builder.Services.AddMediatR(typeof(CreatePerson));
+builder.Services.AddValidatorsFromAssemblyContaining<PersonInputValidator>();
+
+builder.Services.AddFluentValidationAutoValidation();
 
 builder.Services.AddScoped(typeof(IIPCCommand<>), typeof(IPCCommand<>));
 builder.Services.AddScoped(typeof(IIPCQuery<>), typeof(IPCQuery<>));
